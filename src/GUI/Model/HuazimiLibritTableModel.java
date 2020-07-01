@@ -19,7 +19,7 @@ public class HuazimiLibritTableModel extends AbstractTableModel{
     List<HuazimiLibrit> list;
 
     
-    String [] cols = {"Client" , "Book Title","Author","Borrowed Date","Receipt Date","Active"};
+    String [] cols = {"Client" , "Book Title","Author","Borrowed Date","Receipt Date","Active","Price"};
     
     public HuazimiLibritTableModel(){}
     
@@ -81,6 +81,8 @@ public class HuazimiLibritTableModel extends AbstractTableModel{
                 return l.getHLDataLeshimit();
             case 5: 
                 return active ;
+            case 6: 
+                return l.getHlIsbn().getLCmimiMujor() ;
             default:
                 return null;
             

@@ -8,15 +8,12 @@ package GUI.View;
 import BLL.Stafi;
 import DAL.LibraryException;
 import DAL.StafiRepository;
-import java.awt.Color;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,14 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -64,26 +59,27 @@ public class AdminFormGUI extends javax.swing.JFrame {
     StafiRepository sr = new StafiRepository();
     int id;
 
-    public void setNameLabel(String sEmri,String sMbiemri, int i) throws LibraryException {
+    public void setNameLabel(String sEmri, String sMbiemri, int i) throws LibraryException {
         id = i;
         adminName.setText("Welcome " + sEmri);
-        UserOn.setText(sEmri+" "+sMbiemri);
-
+        UserOn.setText(sEmri + " " + sMbiemri);
+        s=sr.findById(i);
     }
-    public void showDate(){
-    Date d = new Date();
-    SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-    dateLabel.setText(sdf.format(d));
-    new Timer(0,new ActionListener(){
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           Date d = new Date();
-             SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss a");
-            timeLabel.setText(sdf.format(d)); 
-        }
-    
-    }).start();
+    public void showDate() {
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        dateLabel.setText(sdf.format(d));
+        new Timer(0, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date d = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+                timeLabel.setText(sdf.format(d));
+            }
+
+        }).start();
     }
 
     /**
@@ -100,6 +96,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -126,7 +123,11 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -135,19 +136,28 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jPanel16 = new javax.swing.JPanel();
         dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
         Libri = new javax.swing.JButton();
         Autori = new javax.swing.JButton();
         Huazimi = new javax.swing.JButton();
         Kategoria = new javax.swing.JButton();
         Klienti = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin Menu");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -192,12 +202,17 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/libraryIcon.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10)
+                .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,22 +223,30 @@ public class AdminFormGUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(adminName, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel3.setLayout(new java.awt.GridLayout(2, 5, 9, 9));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -231,6 +254,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/addUser.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -239,7 +263,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -266,6 +290,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jLabel3.setText("Add/Edit Staff");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/addUser.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -274,7 +299,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -301,6 +326,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jLabel5.setText("Add/Edit Book");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/addBook.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -309,7 +335,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -336,6 +362,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jLabel7.setText("Add/Edit Author");
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/addUser.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -371,6 +398,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jLabel9.setText("Add/Edit Category");
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/addCategory.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -380,7 +408,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -409,6 +437,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/list.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -417,8 +446,8 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -446,6 +475,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/list.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -453,10 +483,9 @@ public class AdminFormGUI extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,6 +512,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/list.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -491,8 +521,8 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -507,36 +537,80 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jPanel3.add(jPanel11);
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel12MouseClicked(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("List Authors");
+        jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/list.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 255, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel20)
+                .addContainerGap())
         );
 
         jPanel3.add(jPanel12);
 
         jPanel13.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel13MouseClicked(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("List Categories");
+        jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/list.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 255, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addContainerGap())
         );
 
         jPanel3.add(jPanel13);
 
-        jPanel14.setLayout(new java.awt.GridLayout(2, 1, 4, 4));
+        jPanel14.setLayout(new java.awt.GridLayout(3, 1, 4, 4));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel11.setText("User:");
@@ -561,7 +635,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55))
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(UserOn, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                        .addComponent(UserOn, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel15Layout.setVerticalGroup(
@@ -595,7 +669,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .addComponent(dateLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -610,78 +684,110 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
         jPanel14.add(jPanel16);
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jDesktopPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel17.setPreferredSize(new java.awt.Dimension(293, 150));
 
-        Libri.setText("Libri");
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Reports");
+        jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        Libri.setBackground(new java.awt.Color(0, 102, 255));
+        Libri.setText("Book");
+        Libri.setMinimumSize(new java.awt.Dimension(51, 35));
         Libri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LibriActionPerformed(evt);
             }
         });
 
-        Autori.setText("Autori");
+        Autori.setBackground(new java.awt.Color(0, 102, 255));
+        Autori.setText("Author");
+        Autori.setMinimumSize(new java.awt.Dimension(61, 35));
         Autori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AutoriActionPerformed(evt);
             }
         });
 
-        Huazimi.setText("Huazimi");
+        Huazimi.setBackground(new java.awt.Color(0, 102, 255));
+        Huazimi.setText("Borrow");
+        Huazimi.setMaximumSize(new java.awt.Dimension(69, 35));
+        Huazimi.setMinimumSize(new java.awt.Dimension(69, 35));
         Huazimi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HuazimiActionPerformed(evt);
             }
         });
 
-        Kategoria.setText("Kategoria");
+        Kategoria.setBackground(new java.awt.Color(0, 102, 255));
+        Kategoria.setText("Category");
         Kategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KategoriaActionPerformed(evt);
             }
         });
 
-        Klienti.setText("Klienti");
+        Klienti.setBackground(new java.awt.Color(0, 102, 255));
+        Klienti.setText("Client");
         Klienti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KlientiActionPerformed(evt);
             }
         });
 
-        jDesktopPane1.setLayer(Libri, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(Autori, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(Huazimi, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(Kategoria, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(Klienti, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(Kategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Klienti, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(Libri, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Autori, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Huazimi, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Libri, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Autori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Huazimi, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Klienti, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Kategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
+        );
+
+        jPanel14.add(jPanel17);
+
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jDesktopPane1.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(Libri)
-                .addGap(45, 45, 45)
-                .addComponent(Autori)
-                .addGap(40, 40, 40)
-                .addComponent(Huazimi)
-                .addGap(51, 51, 51)
-                .addComponent(Kategoria)
-                .addGap(58, 58, 58)
-                .addComponent(Klienti)
-                .addContainerGap(239, Short.MAX_VALUE))
+            .addGap(0, 1049, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Libri)
-                    .addComponent(Autori)
-                    .addComponent(Huazimi)
-                    .addComponent(Kategoria)
-                    .addComponent(Klienti))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jButton3.setBackground(new java.awt.Color(0, 102, 255));
@@ -699,9 +805,58 @@ public class AdminFormGUI extends javax.swing.JFrame {
         jMenu2.setText("Edit");
 
         jMenu3.setText("Edit Profile");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenu3);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu4.setText("Reports");
+
+        jMenuItem1.setText("Books");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem2.setText("Clients");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
+        jMenuItem3.setText("Authors");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
+        jMenuItem4.setText("Categories");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem4);
+
+        jMenuItem5.setText("Borrowed books");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -713,10 +868,10 @@ public class AdminFormGUI extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)))
+                    .addComponent(jButton3)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -729,9 +884,9 @@ public class AdminFormGUI extends javax.swing.JFrame {
                     .addComponent(jDesktopPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addGap(5, 5, 5)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(295, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 362, Short.MAX_VALUE)
+                        .addGap(0, 24, Short.MAX_VALUE))))
         );
 
         pack();
@@ -767,8 +922,8 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
         lg.show();
     }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        playSound("mouse-click.wav");
+    public void editProfile(){
+     playSound("mouse-click.wav");
         EditAdminProfileGUI ea = new EditAdminProfileGUI();
         try {
             ea.setEntity(id);
@@ -776,6 +931,9 @@ public class AdminFormGUI extends javax.swing.JFrame {
             Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         ea.setVisible(true);
+    };
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       editProfile();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -827,6 +985,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
             @Override
             public void run() {
                 RegisterBookGUI rb = new RegisterBookGUI();
+                rb.setStafi(s);
                 rb.show();
                 t.stop();
                 jPanel2.setVisible(false);
@@ -841,33 +1000,142 @@ public class AdminFormGUI extends javax.swing.JFrame {
         playSound("mouse-click.wav");
         Thread t = new Thread(new Runnable() {
 
-                @Override
-                public void run() {
-                    jPanel2.setVisible(true);
-                    loading();
-                    
-                }
+            @Override
+            public void run() {
+                jPanel2.setVisible(true);
+                loading();
 
-            });
-        
-       t.start();
-       Thread t1 = new Thread(new Runnable() {
+            }
 
-                @Override
-                public void run() {
-                    RegisterAuthorGUI ra=new RegisterAuthorGUI();
-                    ra.show();
-                   t.stop();
-                   jPanel2.setVisible(false);
-                   rePaint();
-                }
+        });
 
-            });
-       t1.start();
+        t.start();
+        Thread t1 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                RegisterAuthorGUI ra = new RegisterAuthorGUI();
+                ra.show();
+                t.stop();
+                jPanel2.setVisible(false);
+                rePaint();
+            }
+
+        });
+        t1.start();
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        playSound("mouse-click.wav");
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                jPanel2.setVisible(true);
+                loading();
+
+            }
+
+        });
+
+        t.start();
+        Thread t1 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                RegisterKategoriaLibraveGUI rl = new RegisterKategoriaLibraveGUI();
+                rl.show();
+                t.stop();
+                jPanel2.setVisible(false);
+                rePaint();
+            }
+
+        });
+        t1.start();
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    ClientView cv = new ClientView();
+    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+
+        jDesktopPane1.add(cv);
+        cv.show();
+    }//GEN-LAST:event_jPanel9MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        cv.dispose();
+        bb.dispose();
+        bv.dispose();
+        av.dispose();
+        cav.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+    BorrowedBooksView bb = new BorrowedBooksView();
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        jDesktopPane1.add(bb);
+        bb.show();
+    }//GEN-LAST:event_jPanel10MouseClicked
+    BookView bv = new BookView();
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        jDesktopPane1.add(bv);
+        bv.show();
+    }//GEN-LAST:event_jPanel11MouseClicked
+
+        public void bookReport(){
          playSound("mouse-click.wav");
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                jPanel2.setVisible(true);
+                loading();
+
+            }
+
+        });
+
+        t.start();
+        Thread t1 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+
+            Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+
+            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem2\\src\\Raportet\\LibriReport.jrxml" + "");
+
+            Map<String, Object> parametrat = new HashMap<>();
+
+            JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+
+            JasperViewer.viewReport(jasperprint, false);
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                t.stop();
+                jPanel2.setVisible(false);
+                rePaint();
+            }
+
+        });
+        t1.start();
+
+        }
+    
+    private void LibriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LibriActionPerformed
+        bookReport();
+    }//GEN-LAST:event_LibriActionPerformed
+
+    public void authorReport(){
+    playSound("mouse-click.wav");
         Thread t = new Thread(new Runnable() {
 
                 @Override
@@ -884,8 +1152,32 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
                 @Override
                 public void run() {
-                    RegisterKategoriaLibraveGUI rl=new RegisterKategoriaLibraveGUI();
-                    rl.show();
+                   
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+
+            Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+
+            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem2\\src\\Raportet\\AutoriReport.jrxml" + "");
+
+            Map<String, Object> parametrat = new HashMap<>();
+
+            JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+
+            JasperViewer.viewReport(jasperprint,false);
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
                    t.stop();
                    jPanel2.setVisible(false);
                    rePaint();
@@ -893,238 +1185,249 @@ public class AdminFormGUI extends javax.swing.JFrame {
 
             });
        t1.start();
-    }//GEN-LAST:event_jPanel8MouseClicked
-
-    ClientView cv=new ClientView();
-    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
         
-        jDesktopPane1.add(cv);
-        cv.show();
-    }//GEN-LAST:event_jPanel9MouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      cv.dispose();
-      bb.dispose();
-      bv.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-    BorrowedBooksView bb=new BorrowedBooksView();
-    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
-       jDesktopPane1.add(bb);
-       bb.show();
-    }//GEN-LAST:event_jPanel10MouseClicked
-    BookView bv=new BookView();
-    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
-       jDesktopPane1.add(bv);
-       bv.show();
-    }//GEN-LAST:event_jPanel11MouseClicked
-
-    private void LibriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LibriActionPerformed
         
-                try{
-                    System.out.println("1");
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    System.out.println("2");
-                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
-                    System.out.println("3");
-                  
-                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
-                    System.out.println("4"); 
-                    
-                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\01.07\\src\\Raportet\\LibriReport.jrxml" +"");
-                    System.out.println("5");
-                    
-                    Map<String,Object> parametrat = new HashMap<>();
-                    System.out.println("6");
-                    
-                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
-                    System.out.println("7");
-                    
-                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
-                        System.out.println("8");
-                        JasperViewer.viewReport(jasperprint);
-                        System.out.println("9");
-                        
-                      
-                        
-                            
-                        
-                    
-                    
-                } catch (ClassNotFoundException ex) {
-                        System.out.println("nuk");
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_LibriActionPerformed
-
+    }
+    
     private void AutoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AutoriActionPerformed
-               try{
-                    System.out.println("1");
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    System.out.println("2");
-                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
-                    System.out.println("3");
-                  
-                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
-                    System.out.println("4"); 
-                    
-                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\01.07\\src\\Raportet\\AutoriReport.jrxml" +"");
-                    System.out.println("5");
-                    
-                    Map<String,Object> parametrat = new HashMap<>();
-                    System.out.println("6");
-                    //Vetvendosej <333hahahahahahah 
-                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
-                    System.out.println("7");
-                    
-                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
-                        System.out.println("8");
-                        JasperViewer.viewReport(jasperprint);
-                        System.out.println("9");
-                        
-                      
-                        
-                            
-                        
-                    
-                    
-                } catch (ClassNotFoundException ex) {
-                        System.out.println("nuk");
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        authorReport();
     }//GEN-LAST:event_AutoriActionPerformed
+    public void borrowReport(){
+     playSound("mouse-click.wav");
+        Thread t = new Thread(new Runnable() {
 
+                @Override
+                public void run() {
+                    jPanel2.setVisible(true);
+                    loading();
+                    
+                }
+
+            });
+        
+       t.start();
+       Thread t1 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                   try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+
+            Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+
+            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem2\\src\\Raportet\\HuazimiLibritReport.jrxml" + "");
+
+            Map<String, Object> parametrat = new HashMap<>();
+
+            JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+
+            JasperViewer.viewReport(jasperprint,false);
+
+        } catch (ClassNotFoundException ex) {
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                   t.stop();
+                   jPanel2.setVisible(false);
+                   rePaint();
+                }
+
+            });
+       t1.start();
+        
+    }
+    
     private void HuazimiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuazimiActionPerformed
-             try{
-                    System.out.println("1");
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    System.out.println("2");
-                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
-                    System.out.println("3");
-                  
-                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
-                    System.out.println("4"); 
-                    
-                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\01.07\\src\\Raportet\\HuazimiLibritReport.jrxml" +"");
-                    System.out.println("5");
-                    
-                    Map<String,Object> parametrat = new HashMap<>();
-                    System.out.println("6");
-                    
-                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
-                    System.out.println("7");
-                    
-                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
-                        System.out.println("8");
-                        JasperViewer.viewReport(jasperprint);
-                        System.out.println("9");
-                        
-                      
-                        
-                            
-                        
-                    
-                    
-                } catch (ClassNotFoundException ex) {
-                        System.out.println("nuk");
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       borrowReport();
     }//GEN-LAST:event_HuazimiActionPerformed
+    
+    public void categoryReport(){
+      playSound("mouse-click.wav");
+        Thread t = new Thread(new Runnable() {
 
+                @Override
+                public void run() {
+                    jPanel2.setVisible(true);
+                    loading();
+                    
+                }
+
+            });
+        
+       t.start();
+       Thread t1 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                        
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+
+            Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+
+            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem2\\src\\Raportet\\KategoriaLibrit.jrxml" + "");
+
+            Map<String, Object> parametrat = new HashMap<>();
+
+            JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+
+            JasperViewer.viewReport(jasperprint,false);
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println("nuk");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                   t.stop();
+                   jPanel2.setVisible(false);
+                   rePaint();
+                }
+
+            });
+       t1.start();
+       
+
+    }
+        
     private void KategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KategoriaActionPerformed
-                try{
-                    System.out.println("1");
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    System.out.println("2");
-                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
-                    System.out.println("3");
-                  
-                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
-                    System.out.println("4"); 
-                    
-                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\01.07\\src\\Raportet\\KategoriaLibrit.jrxml"+"");
-                    System.out.println("5");
-                    
-                    Map<String,Object> parametrat = new HashMap<>();
-                    System.out.println("6");
-                    
-                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
-                    System.out.println("7");
-                    
-                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
-                        System.out.println("8");
-                        JasperViewer.viewReport(jasperprint);
-                        System.out.println("9");
-                        
-                      
-                        
-                            
-                        
-                    
-                    
-                } catch (ClassNotFoundException ex) {
-                        System.out.println("nuk");
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-             
-      
+          categoryReport();
     }//GEN-LAST:event_KategoriaActionPerformed
+    
+    public void clientReport(){
+     playSound("mouse-click.wav");
+        Thread t = new Thread(new Runnable() {
 
-    private void KlientiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KlientiActionPerformed
-        //klientet
+                @Override
+                public void run() {
+                    jPanel2.setVisible(true);
+                    loading();
+                    
+                }
+
+            });
         
-                try{
-                    System.out.println("1");
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    System.out.println("2");
-                    String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
-                    System.out.println("3");
+       t.start();
+       Thread t1 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
                   
-                    Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
-                    System.out.println("4"); 
-                    
-                    JasperDesign jasperDesign = JRXmlLoader.load("D:\\Fakultet\\Lab1\\Projekti Grupor\\01.07\\src\\Raportet\\KlientiReport.jrxml" +"");
-                    System.out.println("5");
-                    
-                    Map<String,Object> parametrat = new HashMap<>();
-                    System.out.println("6");
-                    
-                    JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
-                    System.out.println("7");
-                    
-                        JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
-                        System.out.println("8");
-                        JasperViewer.viewReport(jasperprint);
-                        System.out.println("9");
-                        
-                      
-                        
-                            
-                        
-                    
-                    
-                } catch (ClassNotFoundException ex) {
-                        System.out.println("nuk");
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            String path = "jdbc:sqlserver://localhost:1433;databaseName=LibraryManagmentSystem";
+
+            Connection connection = DriverManager.getConnection(path, "adminGroup", "admin");
+
+            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\Naim\\Documents\\NetBeansProjects\\LibraryManagmentSystem2\\src\\Raportet\\KlientiReport.jrxml" + "");
+
+            Map<String, Object> parametrat = new HashMap<>();
+
+            JasperReport jreport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperprint = JasperFillManager.fillReport(jreport, parametrat, connection);
+
+            JasperViewer.viewReport(jasperprint,false);
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println("nuk");
         } catch (SQLException ex) {
             Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException ex) {
             Logger.getLogger(AdminFormGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+                   t.stop();
+                   jPanel2.setVisible(false);
+                   rePaint();
+                }
+
+            });
+       t1.start();
+    }
+    
+    
+    private void KlientiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KlientiActionPerformed
+        clientReport();
     }//GEN-LAST:event_KlientiActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       bookReport();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       clientReport();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        authorReport();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        categoryReport();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        borrowReport();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        editProfile();
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+       playSound("mouse-click.wav");
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                jPanel2.setVisible(true);
+                loading();
+
+            }
+
+        });
+
+        t.start();
+        Thread t1 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                RegisterClientGUI rb = new RegisterClientGUI();
+                rb.show();
+                t.stop();
+                jPanel2.setVisible(false);
+                rePaint();
+            }
+
+        });
+        t1.start();
+    }//GEN-LAST:event_jPanel4MouseClicked
+     AuthorView av=new AuthorView();
+    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+        jDesktopPane1.add(av);
+        av.show();
+    }//GEN-LAST:event_jPanel12MouseClicked
+    CategoryView cav=new CategoryView();
+    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+      jDesktopPane1.add(cav);
+        cav.show();  
+    }//GEN-LAST:event_jPanel13MouseClicked
 
     public void loading() {
         ImageIcon imageIcon = new ImageIcon("loadingIcon.gif");
@@ -1211,6 +1514,12 @@ public class AdminFormGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1221,7 +1530,13 @@ public class AdminFormGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1230,6 +1545,7 @@ public class AdminFormGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

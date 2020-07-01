@@ -41,6 +41,7 @@ public class RegisterStaffGUI extends javax.swing.JFrame {
         this.tableSelectedIndexChange();
         IdTextField.setEnabled(true);
         centreWindow(this);
+        setExtendedState(MAXIMIZED_BOTH);
     }
  
     

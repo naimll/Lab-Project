@@ -8,6 +8,7 @@ package GUI.View;
 import BLL.Autori;
 import BLL.KategoriaLibrit;
 import BLL.Libri;
+import BLL.Stafi;
 import DAL.AutoriRepository;
 
 import DAL.CrudFormException;
@@ -63,9 +64,12 @@ public class RegisterBookGUI extends javax.swing.JFrame {
          loadBookTable();
          this.IsbnTextField.setEnabled(true);
          centreWindow(this);
-         
+         setExtendedState(MAXIMIZED_BOTH);
     }
-    
+    Stafi s;
+    public void setStafi(Stafi st){
+    s=st;
+    }
 
         public static void centreWindow(Window frame) {
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -195,8 +199,8 @@ public class RegisterBookGUI extends javax.swing.JFrame {
         DeleteClientButton = new javax.swing.JButton();
         PriceTextField = new javax.swing.JTextField();
         AuthorLabel = new javax.swing.JLabel();
-        AuthorComboBox = new javax.swing.JComboBox<>();
-        CategoryComboBox = new javax.swing.JComboBox<>();
+        AuthorComboBox = new javax.swing.JComboBox<Autori>();
+        CategoryComboBox = new javax.swing.JComboBox<KategoriaLibrit>();
         IsbnTextField = new javax.swing.JTextField();
         IsbnLabel = new javax.swing.JLabel();
         PublishigYearDate = new com.toedter.calendar.JYearChooser();
@@ -248,7 +252,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(6, 6, 6)
                 .addComponent(jLabel1)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         AddClientPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -601,7 +605,7 @@ public class RegisterBookGUI extends javax.swing.JFrame {
                   throw new LibraryException("Isbn should not be null, and should contain 10 or 13 digits");
               }
               l.setIsbn(IsbnTextField.getText());
-              //l.setLStafiId();
+              l.setLStafiId(s);
               KategoriaLibrit kl = l.getLKategoriaId() ;
               int sasia = Integer.parseInt(kl.getKLSasia()) + 1 ;
               kl.setKLSasia(Integer.toString(sasia));

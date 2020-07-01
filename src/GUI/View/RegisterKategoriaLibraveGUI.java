@@ -37,6 +37,7 @@ public class RegisterKategoriaLibraveGUI extends javax.swing.JFrame {
         this.loadTable();
         this.tableSelectedIndexChange();
         centreWindow(this);
+        setExtendedState(MAXIMIZED_BOTH);
     }
     
         public static void centreWindow(Window frame) {

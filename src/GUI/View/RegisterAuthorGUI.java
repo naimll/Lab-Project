@@ -38,6 +38,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
         this.loadTable();
         this.tableSelectedIndexChange();
         centreWindow(this);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     
@@ -159,7 +160,7 @@ public class RegisterAuthorGUI extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));

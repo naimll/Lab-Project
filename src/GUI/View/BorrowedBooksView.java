@@ -23,6 +23,7 @@ public class BorrowedBooksView extends javax.swing.JInternalFrame {
      */
     public BorrowedBooksView() {
         initComponents();
+        loadData();
     }
     HuazimiRepository kr=new HuazimiRepository();
     HuazimiLibritTableModel ct=new HuazimiLibritTableModel();
@@ -50,6 +51,11 @@ public class BorrowedBooksView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -67,7 +73,7 @@ public class BorrowedBooksView extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1031, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

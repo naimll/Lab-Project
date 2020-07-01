@@ -54,6 +54,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         loadComboBoxLibrat();
         this.SetToFinished.setVisible(false);
         centreWindow(this);
+        setExtendedState(MAXIMIZED_BOTH);
     }
     
         public static void centreWindow(Window frame) {
@@ -129,7 +130,7 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
         Search = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1328, 770));
 
@@ -434,8 +435,9 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
                 this.clear();
                 this.loadTableHuazimi();
                 
-            } catch (LibraryException ex) {
+            } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Plotsoni fushat!");
+            return;
         }
 
                 clear();

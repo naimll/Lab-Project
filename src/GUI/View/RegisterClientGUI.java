@@ -48,6 +48,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
         this.tableSelectedIndexChange();
         this.IdTextField.setEnabled(true);
         centreWindow(this);
+         setExtendedState(MAXIMIZED_BOTH);
     }
     
     
@@ -213,7 +214,7 @@ public class RegisterClientGUI extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         AddClientPanel.setBackground(new java.awt.Color(204, 204, 204));
