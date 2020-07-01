@@ -18,6 +18,8 @@ import GUI.Model.LibriComboBoxModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -400,15 +402,52 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
 
     private void AddClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddClientButtonActionPerformed
         
+      
             try{
                 int row = table.getSelectedRow();
                 if(row == -1){
                     HuazimiLibrit p = new HuazimiLibrit();
+                    if(klientetCmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Client");
+                    }                    
                     p.setHLKlientiId((Klienti)klientetCmb.getSelectedItem());
+                    
+                    if(libricmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Book");                        
+                    }                    
                     p.setHlIsbn((Libri)libricmb.getSelectedItem());
+                    
+                  if(jDateChooser1.getDate()== null){
+                        throw new LibraryException("Please select a delivery date");
+                    }
+                    
+                    if(jDateChooser2.getDate() == null){
+                        throw new LibraryException("Please select a receipt date");
+                    }                    
+                    
+                    
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    
+                    Date date = new Date();
+                    Date date1 = this.jDateChooser1.getDate();
+                    Date date2 = this.jDateChooser2.getDate();
+                   
+                    
+                   
+                    if(date1.getYear() < date.getYear() || date1.getMonth() < date.getMonth() || date1.getDate() < date.getDate()){
+                        throw new LibraryException("Please choose a correct delivery Date");
+                    }
+                    
+                        if(date2.getYear() > date1.getYear()){
+                        
+                    }   else if(date1.getYear() > date2.getYear() || date1.getMonth() > date2.getMonth()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }   else if(date1.getDate() > date2.getDate()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }
+                        
                     p.setHLDataLeshimit(jDateChooser1.getDate());
                     p.setHLDataKthimit(jDateChooser2.getDate());
-                    
                     Libri l = p.getHlIsbn();
                     
                     int sasia = l.getLSasia() ;
@@ -425,28 +464,84 @@ public class RegisterHuazimiLibrave1GUI extends javax.swing.JFrame {
 
                 }else{
                      HuazimiLibrit p = this.huazimiLibritTableModel.getHuazimiLibrit(row);
+                     Libri l = p.getHlIsbn();
+                     
+                     if(p.getIsActive() == 0){
+                         this.clear();
+                         this.loadTableHuazimi();
+                         throw new LibraryException ("Can not edit an finished borrowing");
+                     }
+                    if(klientetCmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Client");
+                    }                    
                     p.setHLKlientiId((Klienti)klientetCmb.getSelectedItem());
+                    
+                    if(libricmb.getSelectedItem() == null){
+                        throw new LibraryException("Please select a Book");                        
+                    }
+                    
+                    Libri l1 = (Libri) libricmb.getSelectedItem() ;
+                    if(!l.equals(l1)){
+                        System.out.println("Not equal");
+                        System.out.println("Before- s= "+l.getLSasia());
+                        int s = l.getLSasia() + 1;
+                        int s1 = l1.getLSasia() - 1;
+                        System.out.println("s= "+s);
+                        System.out.println("s1 ="+s1);
+                        l.setLSasia(s);
+                        l1.setLSasia(s1);
+                        this.libriRepository.edit(l);
+                        this.libriRepository.edit(l1);
+                    }                    
                     p.setHlIsbn((Libri)libricmb.getSelectedItem());
+                    
+                  if(jDateChooser1.getDate()== null){
+                        throw new LibraryException("Please select a delivery date");
+                    }
+                    
+                    if(jDateChooser2.getDate() == null){
+                        throw new LibraryException("Please select a receipt date");
+                    }                    
+                    
+                    
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    
+                    Date date = new Date();
+                    Date date1 = this.jDateChooser1.getDate();
+                    Date date2 = this.jDateChooser2.getDate();
+                   
+                    
+                   
+                    if(date1.getYear() < date.getYear() || date1.getMonth() < date.getMonth() || date1.getDate() < date.getDate()){
+                        throw new LibraryException("Please choose a correct delivery Date");
+                    }
+                    
+                        if(date2.getYear() > date1.getYear()){
+                        
+                    }   else if(date1.getYear() > date2.getYear() || date1.getMonth() > date2.getMonth()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }   else if(date1.getDate() > date2.getDate()){
+                        throw new LibraryException("Choose a correct receipt date");
+                    }
+                        
                     p.setHLDataLeshimit(jDateChooser1.getDate());
                     p.setHLDataKthimit(jDateChooser2.getDate());
+                    
+
+                    
 
                     huazimiRepository.edit(p);
                 }
                 this.clear();
                 this.loadTableHuazimi();
                 
-            } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Plotsoni fushat!");
-            return;
+            } catch (LibraryException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            return ;
         }
 
                 clear();
-                loadTableHuazimi();
-           
-        
-            
-            
-            
+                loadTableHuazimi();    
       
     }//GEN-LAST:event_AddClientButtonActionPerformed
 
